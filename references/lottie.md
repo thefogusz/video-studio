@@ -47,12 +47,22 @@ Key facts:
 1. Sketch the motion as a list: element, property, start/end frame, ease.
 2. Generate the JSON programmatically (Python/JS building dicts) rather than
    hand-typing — fewer bracket errors, reusable easing helpers.
-3. Validate by rendering: open an HTML page with lottie-web
-   (`https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js`,
-   `lottie.loadAnimation({container, renderer:"svg", loop:false, autoplay:false, path:"anim.json"})`)
-   and expose `window.seek = t => anim.goToAndStop(t*1000, false)`;
-   `window.DURATION = anim.totalFrames / anim.frameRate` — then
-   `scripts/render_html.mjs` gives you a preview MP4/frames to inspect.
+3. Validate by rendering. Make an HTML page with lottie-web and the JSON
+   **inlined** (a `file://` page can't fetch `path:"anim.json"`):
+   ```html
+   <div id="c" style="width:512px;height:512px"></div>
+   <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+   <script>
+     const anim = lottie.loadAnimation({container: document.getElementById("c"), renderer: "svg",
+       loop: false, autoplay: false, animationData: /* paste anim.json here */ {}});
+     anim.addEventListener("DOMLoaded", () => {
+       window.seek = t => { anim.goToAndStop(t * 1000, false); };
+       window.DURATION = anim.totalFrames / anim.frameRate;
+     });
+   </script>
+   ```
+   Then `node scripts/render_html.mjs lottie.html out/lottie_v001.mp4 --w 512 --h 512`
+   gives a preview MP4 to inspect with a contact sheet.
 4. Check it in the LottieFiles preview or the target app runtime when
    possible — each player supports a slightly different feature set
    (expressions, effects, some masks are not supported on mobile).

@@ -95,8 +95,13 @@ ffmpeg -i out.mp4 -vf "fps=1/2,scale=320:-1,tile=6x4" -frames:v 1 work/contact_s
 ffmpeg -i out.mp4 -vf blackdetect=d=0.1:pix_th=0.1 -an -f null - 2>&1 | grep black_
 ```
 
-## Windows notes
+## Platform notes
 
-Use forward slashes in paths. In the `subtitles=` filter, escape the drive
-colon: `subtitles='C\:/work/subs.srt'`. Quote filtergraphs with double quotes
-in PowerShell/cmd.
+- **Windows:** use forward slashes in paths. In the `subtitles=` filter,
+  escape the drive colon: `subtitles='C\:/work/subs.srt'`. Quote
+  filtergraphs with double quotes in PowerShell/cmd. Very long working paths
+  (>260 chars) make native tools fail to start — work in a short folder.
+- **macOS:** `brew install ffmpeg` (the Homebrew build includes libass for
+  subtitles). Hardware encoding: `-c:v h264_videotoolbox -b:v 12M` is much
+  faster than libx264 for previews; use libx264 for final quality/size.
+- **Linux:** distro ffmpeg may lack libass/fdk — check `ffmpeg -filters | grep subtitles`.

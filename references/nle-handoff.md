@@ -50,7 +50,9 @@ with track `AA` for stereo audio, or use `B` for video+audio.
 A `<xmeml version="4">` → `<sequence>` with `<rate><timebase>30</timebase><ntsc>FALSE</ntsc></rate>`,
 `<media><video><track><clipitem>` per cut, each with `<start>/<end>`
 (timeline frames), `<in>/<out>` (source frames) and a `<file id=…>` holding
-`<pathurl>file:///C:/footage/interview_A.mp4</pathurl>` plus the file's
+`<pathurl>file:///C:/footage/interview_A.mp4</pathurl>` (Windows) or
+`file:///Users/name/footage/interview_A.mp4` (macOS; URL-encode spaces as
+`%20`) plus the file's
 rate/duration. Define each `<file>` fully once, then reference it by id.
 Mirror the video clipitems in `<audio>` tracks with the same timings.
 For 29.97/23.976 footage set `<ntsc>TRUE</ntsc>` with timebase 30/24.

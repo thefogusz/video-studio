@@ -42,10 +42,11 @@ Install (Python 3.10+, ffmpeg on PATH; first use downloads ~1.1 GB of models;
 tell the user before installing):
 ```bash
 git clone https://github.com/Leonxlnx/earshot && cd earshot
-python -m venv .venv
-.venv/Scripts/python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-.venv/Scripts/python -m pip install -e ".[mcp]"
-.venv/Scripts/python -m earshot doctor --load
+python3 -m venv .venv
+# macOS/Linux: PY=.venv/bin/python     Windows: PY=.venv/Scripts/python
+$PY -m pip install torch --index-url https://download.pytorch.org/whl/cpu   # macOS: plain `pip install torch` (no CPU index needed)
+$PY -m pip install -e ".[mcp]"
+$PY -m earshot doctor --load
 ```
 Useful commands (check `earshot --help`; the tool is evolving):
 - `earshot describe FILE` — what a sound is, in words.

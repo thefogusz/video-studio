@@ -37,7 +37,9 @@ expose `window.seek(t)` and `window.DURATION`.
 ```
 Render:
 ```bash
-node ~/.claude/skills/video-studio/scripts/render_html.mjs scene.html out/scene_v001.mp4 --w 1080 --h 1920 --fps 30
+# <skill-dir> = where this skill is installed (~/.claude/skills/video-studio, ~/.codex/skills/video-studio, ~/.agents/skills/video-studio …)
+# Install the npm package in the project (not in the skill folder): npm i playwright && npx playwright install chromium
+node <skill-dir>/scripts/render_html.mjs scene.html out/scene_v001.mp4 --w 1080 --h 1920 --fps 30
 ```
 Preview a range first: `--from 0 --to 1.5`. Transparent overlay for
 compositing on footage: give `body` `background:transparent` and add

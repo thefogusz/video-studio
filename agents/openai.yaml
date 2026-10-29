@@ -1,0 +1,7 @@
+interface:
+  display_name: "Video Studio"
+  short_description: "Direct, edit, animate, caption and sound-design video"
+  default_prompt: "Use $video-studio to plan and make a 15-second vertical promo video with animated Thai captions."
+
+policy:
+  allow_implicit_invocation: true

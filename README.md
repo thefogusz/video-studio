@@ -14,21 +14,56 @@ animation and sound** in one place.
 
 ## Install
 
+Works with **Claude Code** and **Codex** on **Windows, macOS and Linux**.
+
 ```bash
-npx skills add thefogusz/video-studio -g
+npx skills add thefogusz/video-studio -g -a claude-code codex
 ```
-Or copy this folder to `~/.claude/skills/video-studio/`.
+Or clone and copy the folder:
+
+| Agent | Folder |
+|---|---|
+| Claude Code | `~/.claude/skills/video-studio/` |
+| Codex | `~/.codex/skills/video-studio/` (or `~/.agents/skills/video-studio/`) |
+
+Codex reads `agents/openai.yaml` for its display name and starter prompt
+(`$video-studio`).
+
+## Requirements
+
+Install only what the technique you use needs:
+
+| Tool | macOS | Windows | Used for |
+|---|---|---|---|
+| ffmpeg | `brew install ffmpeg` | `winget install Gyan.FFmpeg` | everything |
+| Node + Playwright | `npm i playwright && npx playwright install chromium` (in your project) | same | HTML/GSAP and Lottie rendering |
+| Whisper | `pip3 install openai-whisper` | `pip install openai-whisper` (run with `PYTHONUTF8=1`) | captions |
+| PyThaiNLP | `pip3 install pythainlp` | `pip install pythainlp` | Thai word timing |
+| Manim | `pip3 install manim` (+ MacTeX for formulas) | `pip install manim` (+ MiKTeX for formulas) | explainer animation |
+| auto-editor | `pip3 install auto-editor` | `pip install auto-editor` | silence removal |
 
 ## Layout
 
 ```
-SKILL.md                 router + shared workflow + craft principles
-references/              one file per technique, loaded only when needed
-scripts/render_html.mjs  renders a deterministic HTML/GSAP page to MP4 (Playwright + ffmpeg)
+SKILL.md                  router, shared workflow, craft and platform notes
+agents/openai.yaml        Codex UI metadata
+references/               one file per technique, loaded only when needed
+scripts/render_html.mjs   renders a deterministic HTML/GSAP/Lottie page to MP4 (Playwright + ffmpeg)
+scripts/thai_words.py     merges Whisper's Thai sub-word timestamps into words
 ```
 
-Requirements depend on the technique: ffmpeg for everything; Node and
-Playwright for HTML rendering; Python for Whisper, Manim and auto-editor.
+## Tested
+
+Tested on Windows 11 with ffmpeg 9.0.1, Python 3.11, Node 25 and
+Playwright 1.64:
+
+- ffmpeg recipes: trim, join, 9:16, speed, loudnorm, burned and karaoke Thai subtitles
+- talking-head recut script
+- HTML/GSAP render and Lottie render
+- Manim with Thai text (without LaTeX)
+- Whisper Thai transcription and `thai_words.py`
+
+Not yet tested: macOS, Remotion, earshot, auto-editor, Manim with LaTeX.
 
 ## Credits
 

@@ -12,6 +12,11 @@ manim -s -qh scene.py Intro  # save last frame as PNG (evidence)
 Output lands in `media/videos/scene/<quality>/Intro.mp4`; copy to `out/` with
 a version name.
 
+**LaTeX check first:** `MathTex`/`Tex` need a LaTeX install (`latex --version`).
+Without it Manim fails with an unhelpful `FileNotFoundError: [WinError 2]`.
+Either install MiKTeX/TeX Live (ask the user, it's large), or avoid LaTeX:
+`Text("a² + b² = c²")` with Unicode superscripts covers simple formulas.
+
 ## Pattern
 
 ```python
@@ -47,7 +52,10 @@ Principles (3Blue1Brown style):
 
 Thai text: use `Text(...)` (Pango) with a Thai font name; `Tex/MathTex` can't
 render Thai. If glyphs show as boxes the font name is wrong — check installed
-fonts (`fc-list :lang=th` or Windows Fonts folder).
+fonts: Linux `fc-list :lang=th`, macOS Font Book (built-in Thai: Thonburi,
+Sukhumvit Set, Ayuthaya), Windows `C:\Windows\Fonts` (Leelawadee UI, Tahoma,
+plus any installed Noto Sans Thai). Tested on Windows: `font="Noto Sans Thai"`
+renders correctly.
 
 ## Verify
 

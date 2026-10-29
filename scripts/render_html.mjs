@@ -9,10 +9,20 @@
 //   node render_html.mjs page.html out/anim_v001.mp4 [--w 1080 --h 1920 --fps 30 --from 0 --to <sec> --alpha]
 //
 // --alpha renders a transparent ProRes 4444 .mov (page background must be transparent).
-import { chromium } from "playwright";
 import { spawn } from "node:child_process";
+import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
+
+// Resolve playwright from the project (cwd) first: this script lives in the skill folder,
+// where a bare import would look for node_modules and not find the project's install.
+let chromium;
+try {
+  ({ chromium } = createRequire(path.join(process.cwd(), "index.js"))("playwright"));
+} catch {
+  try { ({ chromium } = await import("playwright")); }
+  catch { console.error("playwright not found: run `npm i playwright && npx playwright install chromium` in this folder"); process.exit(1); }
+}
 
 const args = process.argv.slice(2);
 const [input, output] = args;

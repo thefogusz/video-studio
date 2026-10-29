@@ -10,7 +10,9 @@ clipping words or making it feel robotic.
    `ffmpeg-cutting.md`.
 2. **Transcribe with word timestamps** (see `captions.md`):
    `whisper work/audio.wav --model medium --language th --word_timestamps True --output_format json`
-   For Thai use `medium` or `large-v3`; `small` misses many words.
+   For Thai use `medium` or `large-v3`; `small` misses many words. On Windows
+   set `PYTHONUTF8=1` first, and merge Thai sub-word timestamps into words
+   (see `captions.md`) before matching fillers.
 3. **Build the keep-list as data** (`work/cuts.json`): a list of
    `{start, end, text}` segments to keep, derived from the words.
    Remove:

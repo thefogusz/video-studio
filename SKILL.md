@@ -129,7 +129,25 @@ and official `hyperframes` / `remotion-*` skills if present.
   No `setTimeout`, CSS transitions, `Math.random()` without a seed, or
   real-time clocks — they render differently every time.
 
-## 4. Paid services and installs
+## 4. Platforms and agents
+
+The skill works in Claude Code and Codex (same `SKILL.md` format; Codex also
+reads `agents/openai.yaml`), on Windows, macOS and Linux. `<skill-dir>` in the
+references means wherever this folder is installed. Differences that matter:
+- **Python:** `python3` on macOS/Linux, `python` (or `py`) on Windows.
+- **Install tools:** macOS `brew install ffmpeg` · Windows
+  `winget install Gyan.FFmpeg` · Linux `apt install ffmpeg`. Python packages
+  via pip, Node packages via npm in the project folder.
+- **Thai fonts:** Windows has Leelawadee UI/Tahoma; macOS has Thonburi,
+  Sukhumvit Set, Ayuthaya; Noto Sans Thai/Prompt/Kanit must be installed
+  (Google Fonts, or `brew install --cask font-noto-sans-thai`).
+- **Windows only:** set `PYTHONUTF8=1` before Python tools that print Thai
+  (Whisper crashes otherwise); keep working folders on short paths.
+- MCP tools named here (CatCut, Higgsfield `pr_*`/`ae_*`) are optional: use
+  them only if they're connected in the current agent; otherwise use the
+  file-based routes.
+
+## 5. Paid services and installs
 
 Ask before using anything that costs money (AI video/voice generation,
 cloud renders) or installing large tools. Free local tools (ffmpeg, Python

@@ -7,12 +7,23 @@ ffmpeg -i in.mp4 -vn -ac 1 -ar 16000 work/audio.wav
 pip install -U openai-whisper          # or faster-whisper for ~4x speed
 whisper work/audio.wav --model medium --language th --word_timestamps True --output_format all --output_dir work/
 ```
+- **Windows:** prefix with `PYTHONUTF8=1` (PowerShell: `$env:PYTHONUTF8=1`),
+  otherwise Whisper crashes printing Thai to the console
+  (`UnicodeEncodeError: 'charmap'`) and writes no files.
 - Model: `small` is fine for clear English; Thai and noisy audio need
-  `medium` or `large-v3`.
+  `medium` or `large-v3`. Tested: `small` on clean Thai TTS still turned
+  ค่ะ→ข้าว, โค้ด→โคตร, เงียบ→เฉียบ, ซับไตเติล→garbage. The first run
+  downloads the model (small ≈ 460 MB, medium ≈ 1.5 GB, large ≈ 3 GB).
 - Always proof-read: names, brand terms and Thai spelling are where Whisper
   fails. Fix in the JSON/SRT, not by re-running.
-- Thai has no spaces between words, so Whisper segments can be long. Re-split
-  lines yourself.
+- Thai has no spaces between words, so Whisper segments can be long (one
+  5 s segment in testing). Re-split lines yourself.
+- Thai `--word_timestamps` come back as sub-word token fragments (76 pieces
+  for one sentence), not words. Before karaoke/word-pop captions, merge them
+  into real words with the bundled script (segments with PyThaiNLP, gives
+  each word the start of its first fragment and the end of its last; tested:
+  76 fragments → 22 words):
+  `python <skill-dir>/scripts/thai_words.py work/audio.json work/words.json --text work/corrected.txt`
 
 ## Line rules
 
