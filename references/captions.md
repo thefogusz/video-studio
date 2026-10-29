@@ -24,6 +24,19 @@ whisper work/audio.wav --model medium --language th --word_timestamps True --out
   each word the start of its first fragment and the end of its last; tested:
   76 fragments → 22 words):
   `python <skill-dir>/scripts/thai_words.py work/audio.json work/words.json --text work/corrected.txt`
+  With `--text`, the proof-read characters are sequence-matched to what
+  Whisper heard, so a mis-heard stretch or words the speaker said but the
+  text drops (fillers, "ที่เขา…", retakes) don't shift the rest. Tested on
+  11 s of Thai podcast speech where the text left out ~20 characters: the
+  old position-ratio mapping put a word 2.7 s early (inside a pause); the
+  sequence match put it on the speech. Words flagged `"matched": false` were
+  interpolated — check those by ear.
+- Don't put key terms in `--initial_prompt` for Thai: a prompt containing
+  "เบอร์เกอร์" made Whisper hear it in a stammer where it wasn't said.
+- Long Thai stretches over music or B-roll can drift into other scripts
+  (Arabic/Cyrillic/Japanese characters in the text). Transcribe in short
+  windows (one sentence or speaker turn, ±0.5 s) with
+  `--condition_on_previous_text False` and stitch the times back together.
 
 ## Line rules
 
