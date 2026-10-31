@@ -89,8 +89,58 @@ compositing on footage: give `body` `background:transparent` and add
 - **Data callout:** count numbers by tweening an object `{v:0}` and writing
   `Math.round(v)` into the DOM in `onUpdate`.
 
+## One timeline for picture, captions and sound (films longer than ~30 s)
+
+Keep every time in one data file (`timeline.json`): section offsets, chosen voice takes, named beats
+(`"reveal": {"sec": 4, "t": 8.15}`), shots, captions (text from the script, times from alignment), sound cues
+by beat name. The page loads it (inline it at build time with a small `build_film.py`, or `fetch` it) and the
+mixer imports the same file; `cues.json` for the sound checks is generated from it. In one 2:30 film the
+section offsets, shot times and hit times were typed into both the page and the mixer by hand; the copies
+drifted and every re-timed voice take meant editing literals in three places.
+
+Split the page into a reusable runtime (seek, camera, grain, fog, captions engine, chapter cards, hits) and the
+story-specific scenes, so the next film copies the runtime instead of starting over.
+
+## Render: fast, partial, previews
+
+| Need | Command (run where `node_modules/playwright` is) |
+|---|---|
+| Full film, parallel (≈8× faster: 6 browsers + ffmpeg, chunks joined without re-encode) | `node <skill-dir>/scripts/render_fast.mjs film.html out/film_v001.mp4 --workers 6` |
+| Re-render only changed seconds and splice them in | `python <skill-dir>/scripts/splice.py film.html out/film_v001.mp4 out/film_v002.mp4 "25.5-27.1"` |
+| Stills every 1.5 s + contact sheet | `node <skill-dir>/scripts/stills.mjs film.html work/stills --every 1.5 --sheet work/sheet.png` |
+| Transparent overlay (ProRes 4444) | `render_html.mjs ... --alpha` (single browser) |
+
+A full single-browser render of 150 s took ~94 min; a 5 s test went from 164 s to 21 s with 6 workers, which
+scales to ~11 min for the same film (CPU-bound: measure on your machine). Don't use `--gpu` on
+Windows (headless Chrome hung). A partially written MP4 can't be probed ("moov atom not found") until the
+render ends.
+
+## QA scans before the full render
+
+```bash
+node <skill-dir>/scripts/qa_scan.mjs film.html --fps 30        # DOUBLE pops, caption overlaps, text in UI zones
+node <skill-dir>/scripts/extract_events.mjs film.html events.json   # the spotting sheet for sound (sound.md)
+```
+`qa_scan` exits 1 on a problem; JUMP lines are informational (expected on hard cuts and flashes). Mark text that
+may sit anywhere with `data-qa-ignore`, a logo the caption must not touch with `data-qa-logo`. For 16:9 add
+`--nosafe` or set `--top/--bottom/--side`.
+
+## Known traps (each cost a re-render once)
+
+- **Double pop:** `fromTo(..., {immediateRender:false})` on an element reused later leaves it visible from its
+  previous use: it flashes, vanishes, then animates in. `tl.set(el, {opacity:0}, start)` first.
+- A CSS rule like `#shot img{...}` hits every image inside, overlays included: give overlays their own selector.
+- Text on a zooming layer drifts off-frame: set `transform-origin` near the text. Text on a slanted sign: skew,
+  never rotate.
+- Stacked title lines appear top to bottom (line 1, then line 2); a bottom-first build reads as a mistake.
+- A "lights out" overlay goes above drawn marks (rings, stamps, notes) or they float lit in a dark frame.
+- Things entering from under/behind something need a clip-path at that edge.
+- Fonts and GSAP from a CDN make renders depend on the network: vendor `gsap.min.js` and font files for
+  long jobs; emoji need a font that has them (Thai faces don't).
+- Captions and labels in the bottom ~35% of a 9:16 frame sit under TikTok/Reels/Shorts UI (`SKILL.md` §3).
+- Elements that animate `from` must be hidden in their initial state, or they flash at frame 0.
+
 ## Verify
 
-Contact sheet of the render (`ffmpeg-cutting.md` §Evidence) + frames at
-every label time; check fonts, nothing clipped, nothing flashing at frame 0
-(elements that animate `from` should be hidden in their initial state).
+Contact sheet of the render (`ffmpeg-cutting.md` §Evidence) + frames at every label time and every event;
+`qa_scan.mjs` clean; frame count = fps × duration; fonts render (no tofu boxes).

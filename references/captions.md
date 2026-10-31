@@ -1,5 +1,10 @@
 # Captions and subtitles
 
+**Known script (TTS or a read script)?** Don't transcribe for the text: align the script to the audio (forced
+alignment, or the TTS tool's own transcription of the generated clip) and use the script's spelling with the
+aligned times (`voiceover.md` §3). Whisper's Thai text was only ~50% similar to the script and garbled names.
+Transcription below is for footage with no script.
+
 ## Transcribe
 
 ```bash
@@ -42,8 +47,9 @@ ASS colours are `&HAABBGGRR` (blue-green-red, alpha first). On Windows escape
 the path: `subtitles='C\:/proj/work/subs.srt'`. If the font isn't installed
 system-wide, add `:fontsdir=fonts/`.
 
-For 9:16 social, `MarginV` ~ 25–35% of height keeps captions above the
-platform UI.
+For 9:16 social, keep captions above the bottom ~35% (TikTok/Reels/Shorts
+UI covers about 660 px of 1920): `MarginV` ≈ 700–860 at PlayResY 1920, or a
+caption top near y 1060 in an HTML film. 20% was not enough in practice.
 
 ## Word-by-word / karaoke (ASS)
 

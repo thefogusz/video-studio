@@ -62,11 +62,34 @@ hook (0–2 s: an image or line that creates a question) → tension/problem or
 curiosity → reveal (product/idea) → proof (1–3 concrete beats) → payoff and
 call to action → end card with logo held ≥ 1.5 s.
 Long-form explainer: promise → context → 3–5 steps, each one idea → recap.
+Narrated story (1–3 min short): hook (0–4 s) → title by ~4 s → chapters, each ending on a small question →
+reveal → closing question to the viewer (comments) → end card.
+
+**The hook (first 4 seconds)** — viewers decide before 0:04:
+- Frame 0 is already moving, with sound already playing; no logo, channel name or black fade longer than 0.3 s.
+- The first line starts by 0.2 s: a concrete anomaly or claim in ≤ 12 words, never "today we'll talk about…".
+- **Start from the picture the audience already has, then break it** (a story channel: "the zombies you know
+  bite and infect… the first zombie was a slave" beat a hook about graves and old lore nobody remembers).
+- A reveal or strongest image around 3 s, the title around 4 s. Names and context can come after the hook.
+- Write 6–8 hook options in groups (belief twist, flipped fear / promise, strange fact, direct question, timely
+  angle such as a holiday) and let the user pick; compare two hooks later with the platform's retention graph.
+
+| Genre | Hook pattern |
+|---|---|
+| Mystery / true crime | the anomaly, then the twist ("a body, and a letter signed by the killer") |
+| History / documentary | the familiar version, then the surprising truth |
+| Explainer / education | the wrong belief most people hold, or the result first |
+| Product / ad | the problem in one image, or the product doing the impossible |
+| Tutorial | the finished result in the first second |
 
 **Shot list** — one row per shot, written before building:
 
-| # | Dur | Shot size | Camera move | Subject/action | On-screen text | Sound | Transition |
-|---|-----|-----------|-------------|----------------|----------------|-------|------------|
+| # | Dur | Line / beat | Shot size | Camera move | Subject / on-screen event | Light | Text | Sound | Why for this line |
+|---|-----|-------------|-----------|-------------|---------------------------|-------|------|-------|-------------------|
+
+Each shot serves its narration line: choose size, angle, light and the on-screen event *for that line*, and
+avoid stock repeats across neighbours (a lamp in every shot, four "figure walking away", a slow push on
+everything). One shot per 4–8 s for narrated films.
 
 - Shot sizes: wide/establishing (where), medium (who/what), close-up
   (emotion/detail), macro/insert (product truth). Vary sizes between
@@ -98,5 +121,24 @@ cut) and score honestly:
 - **Craft:** consistent palette/type/motion tone; no flashes, no clipped
   text, no dead frames; sound hits land on the cuts (see `sound.md`).
 - **Ending:** clear call to action and logo hold.
+- **Physical sense:** shadows, lights, feet, props and faces behave like the
+  real thing (`parallax-2.5d.md` §2) — viewers report these as bugs.
 List the top 3 fixes, fix them, re-check. Say which items you could not judge
 (e.g. you can't hear audio without a tool like earshot).
+
+**Review the preview yourself before the user sees it.** Show what the film will
+really look like (graded sheets, stills every ~1.5 s and at every event) only
+after you have checked them; a preview with a bug you could have caught costs
+the user's trust and a round trip.
+
+## 5. Brief, budget and series memory
+
+- **Before the first render**, agree the look, the sound policy (real recordings
+  vs generated) and the budget (paid generation per image / voice / music, how
+  many takes). One story channel threw away a whole first version because style,
+  music and sound quality were never in the brief.
+- **For a series**, save the decisions in the project (an `AGENTS.md` / project
+  skill: style block + reference frame, voice and settings, mix numbers, hook
+  rules, delivery rules, a reference episode to copy). Each finished episode
+  should make the next one cheaper; record every correction the user makes as
+  a rule with its reason.

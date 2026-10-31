@@ -5,11 +5,16 @@ animation and sound** in one place.
 
 | Area | What it covers |
 |---|---|
-| Direction | Creative concept from the subject, art-direction style bible, shot list, storyboard, director's critique |
+| Direction | Creative concept from the subject, style bible, 4-second hook, shot list, storyboard, director's critique, series memory |
+| Narration | Script for the ear, TTS takes, audio-tag restraint, forced-alignment timing |
+| Images | Generated stills on a budget, style consistency, fixing the "AI look" |
+| 2.5D parallax | Layered stills with element motion, light events and physical-sense rules |
 | Editing | ffmpeg trim, join, reformat (9:16), speed and loudness; silence removal (auto-editor); talking-head recuts |
 | Captions | Whisper transcription, burned-in and karaoke ASS subtitles, Thai-safe fonts |
 | Animation | HTML + GSAP motion graphics rendered to video, Remotion, Lottie, Manim |
-| Sound | Music beds, SFX placement, sync to cuts, optional [earshot](https://github.com/Leonxlnx/earshot) for listening checks |
+| Sound | Licensed sources, spotting from the picture code, mix numbers, hit budget, measured checks, optional [earshot](https://github.com/Leonxlnx/earshot) |
+| Render + QA | Parallel render (~8x), partial re-render, scans for double pops, caption overlaps and UI safe zones |
+| Delivery | Final checks on the encoded file, cover, per-platform copy, safe clean-up |
 | Handoff | Premiere, Resolve, After Effects and CatCut via FCP7 XML, FCPXML or EDL |
 
 ## Install
@@ -48,7 +53,14 @@ Install only what the technique you use needs:
 SKILL.md                  router, shared workflow, craft and platform notes
 agents/openai.yaml        Codex UI metadata
 references/               one file per technique, loaded only when needed
-scripts/render_html.mjs   renders a deterministic HTML/GSAP/Lottie page to MP4 (Playwright + ffmpeg)
+scripts/render_html.mjs   renders a deterministic HTML/GSAP/Lottie page to MP4 (single browser, --alpha)
+scripts/render_fast.mjs   the same in parallel chunks (~8x faster)
+scripts/splice.py         re-renders only changed seconds and splices them into a render
+scripts/stills.mjs        stills at given times or every N s, plus a contact sheet
+scripts/qa_scan.mjs       double pops, caption overlaps, text in the platform UI zones
+scripts/extract_events.mjs  visual events (cuts, appear, moves, strokes) for sound spotting
+scripts/check_sfx.py      mix vs picture: orphans, hit budget, density, voice clarity, world vs music
+scripts/_page.mjs         shared Playwright helpers
 scripts/thai_words.py     merges Whisper's Thai sub-word timestamps into words
 ```
 
@@ -62,8 +74,10 @@ Playwright 1.64:
 - HTML/GSAP render and Lottie render
 - Manim with Thai text (without LaTeX)
 - Whisper Thai transcription and `thai_words.py`
+- `render_fast.mjs`, `splice.py`, `stills.mjs`, `qa_scan.mjs`, `extract_events.mjs`, `check_sfx.py` on a test page
+  (each check proven to fire); the rules come from five finished 2–3 minute narrated shorts
 
-Not yet tested: macOS, Remotion, earshot, auto-editor, Manim with LaTeX.
+Not yet tested: macOS, Remotion, auto-editor, Manim with LaTeX.
 
 ## Credits
 
