@@ -15,6 +15,7 @@ animation and sound** in one place.
 | Sound | Licensed sources, spotting from the picture code, mix numbers, hit budget, measured checks, optional [earshot](https://github.com/Leonxlnx/earshot) |
 | Render + QA | Parallel render (~8x), partial re-render, scans for double pops, caption overlaps and UI safe zones |
 | Delivery | Final checks on the encoded file, cover, per-platform copy, safe clean-up |
+| Optional preset | A tested style for narrated story Reels (hook, voice, look, sound, copy rules), offered, never imposed |
 | Handoff | Premiere, Resolve, After Effects and CatCut via FCP7 XML, FCPXML or EDL |
 
 ## Install
@@ -75,7 +76,7 @@ Playwright 1.64:
 - Manim with Thai text (without LaTeX)
 - Whisper Thai transcription and `thai_words.py`
 - `render_fast.mjs`, `splice.py`, `stills.mjs`, `qa_scan.mjs`, `extract_events.mjs`, `check_sfx.py` on a test page
-  (each check proven to fire); the rules come from five finished 2–3 minute narrated shorts
+  (each check proven to fire); an optional narrated-Reel preset from five finished 2–3 minute shorts
 
 Not yet tested: macOS, Remotion, auto-editor, Manim with LaTeX.
 

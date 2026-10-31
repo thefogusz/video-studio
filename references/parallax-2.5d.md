@@ -4,10 +4,9 @@ Use this when a video is built from illustrations, paintings, photos or generate
 channels, documentaries, explainers, mystery and true crime, children's stories, product "worlds". The page is
 the HTML/GSAP film (`html-gsap-motion.md`); this file is what to put on it.
 
-The lesson from five narrated shorts: **a slow zoom on stacked layers is not parallax.** The owner's verdict on
-the first attempt was "this is just zooming in and out." The camera move does perhaps 10% of the work. Stills feel
-alive through motion *inside* the frame (light, atmosphere, a small prop move), each motion tied to the story
-beat and, where it makes a noise in the real world, to a real sound.
+A slow zoom on stacked layers reads as "just zooming in and out". Stills feel alive mostly through motion
+*inside* the frame (light, atmosphere, a small prop move), tied to the story beat and, where it would make a
+noise, to a sound. How much motion is a style choice for the brief.
 
 ## 1. Plan layers before generating images
 
@@ -24,7 +23,7 @@ beat and, where it makes a noise in the real world, to a real sound.
 - Some subjects are refused by edit models (a hooded killer, weapons): plan that shot's motion as light, fog and
   sound instead of figure motion.
 
-## 2. Physical sense (each was caught by the viewer as a bug)
+## 2. Physical sense (viewers report these as bugs, in any style)
 
 Stylised motion is fine; it has to be *seamless*.
 - Things standing on ground painted in the plate (people, cars, chairs) get the **same parallax depth as that
@@ -45,7 +44,7 @@ Stylised motion is fine; it has to be *seamless*.
 - Props keep their real shape; different people look different (age, build, face, hair, headwear). Check objects
   and faces in every multi-person shot before anyone else sees it.
 
-## 3. Per-shot template (a 6–10 s shot)
+## 3. A starting per-shot template (a 6–10 s shot; adjust to the style)
 
 - 1 camera move, different from the previous shot's (truck / crane / orbit / push / pull / static) + handheld drift
 - 2–3 element motions (from the table below)

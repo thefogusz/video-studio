@@ -1,7 +1,7 @@
 # Delivery: final checks, cover, platform copy, clean-up
 
 Read when the user approves a cut ("final", "ไฟนอล", "approve"). Order matters: finish and verify everything,
-then publish copy, then clean up last.
+then publishing copy, then clean up last.
 
 ## 1. Final technical checks (on the encoded MP4, not the WAV)
 
@@ -16,25 +16,22 @@ ffmpeg -i out/film_v007.mp4 -vf blackdetect=d=0.3:pix_th=0.05 -an -f null - 2>&1
 
 ## 2. Cover / thumbnail
 
-- Make the cover a **separate image upload**, not baked into frame 0: the first frame belongs to the hook.
-  (Trimming a slow first second is a script/edit fix, not a cover fix.)
-- Vertical-feed covers are cropped to 3:4 in grids: keep text inside the centre 3:4 (y 240–1680 on 1080×1920).
-- One short line, heavy type with an outline, one key word highlighted.
+- Ask whether the cover is a separate upload or the first frame; a separate cover keeps frame 0 for the hook.
+- Vertical-feed covers are often cropped to 3:4 in profile grids: keep cover text inside the centre 3:4
+  (y 240–1680 on 1080×1920).
 
 ## 3. Platform copy (write per platform, in the video's language)
 
 | Platform | What to write |
 |---|---|
-| YouTube / Shorts | title + short description (story in 3–4 lines, a comment question, sources by name, 3–5 hashtags) + tags + playlist |
-| TikTok | short caption + hashtags; Duet / Stitch on |
-| Instagram Reels | caption + ≤ 5 hashtags |
-| Facebook | a story-style post |
+| YouTube / Shorts | title + description + tags + playlist |
+| TikTok | short caption + hashtags; Duet / Stitch setting |
+| Instagram Reels | caption + a few hashtags |
+| Facebook | a post |
 
-Rules the user set after seeing drafts (likely to hold for other creators too; confirm once):
-- **No external URLs** in any copy: cite sources by name only.
-- **No timestamps** for Shorts-length videos (they are not clickable there).
-- AI disclosure through the platform's own AI-content setting, not as text in the copy; ask the user which they want.
-- Facts in the copy must match the script's fact sheet; run the copy through the language humanizer if installed.
+Ask the user's house rules once and save them in the project (links allowed or not, timestamps, sources, AI
+disclosure as text or through the platform's AI-label setting, hashtag count). Facts in the copy must match the
+script's sources. One tested set of rules is in `preset-narrated-reel.md`.
 
 ## 4. Final folder, asset bank, clean-up
 

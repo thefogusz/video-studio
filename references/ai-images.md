@@ -1,8 +1,7 @@
 # Generated images for video: cost, consistency and not looking "AI-made"
 
 Read before generating a set of stills for a video (illustrated story, explainer, storyboard frames, B-roll
-plates). Lessons from five episodes of a narrated illustrated series, where the owner's two strongest complaints
-were "this looks very AI" (ดูเอไอจัด ๆ) and "it doesn't match our channel's tone".
+plates). The two most common complaints are "this looks AI-made" and "it doesn't match our look".
 
 ## 1. Pick the source by budget (ask before anything paid)
 
@@ -35,9 +34,9 @@ Cost levers, measured on one 2:30 film where images were 71% of the generation s
 
 | Tell | Fix in the prompt |
 |---|---|
-| Glossy wet streets / shiny everything | say the surfaces positively: "dry asphalt, dry wood, chalky fog"; drop wet / reflections / shiny |
+| Glossy wet streets / shiny everything | name the surfaces you want positively (e.g. "dry asphalt, matte wood"); drop wet / reflections / shiny unless wanted |
 | Detail spread evenly to every corner | "only the focal subject resolved; the rest loose big shapes, unfinished" |
-| Teal-orange "cinematic" light, a lamp in every shot | **light by story beat**, planned per shot in the shot list: warm practical light only for safety / life beats; pressure beats get moonlight, fog glow, a siren, a flashlight, or a light that dies (done in code) |
+| Teal-orange "cinematic" light, the same lamp in every shot | one motivated light per shot, planned in the shot list for what that line needs |
 | Pretty symmetric model faces | a specific ordinary person with named irregular features (crooked smile, uneven brows, stubble), "no glamour" |
 | Two people with the same face | a FACES table: different age, build, face shape, hair, headwear per person |
 | Props with an invented shape | name the real object and its real proportions; check props, not only faces |
@@ -45,17 +44,17 @@ Cost levers, measured on one 2:30 film where images were 71% of the generation s
 | Value soup | a value plan in numbers: two thirds one dark mass, one mid zone, one small light area |
 
 Also: drop praise words (cinematic, highly detailed, 8k, masterpiece); phrase positively (models draw what a
-negation names), but keep "no text or letters". For a layered film, ask for separated depth planes with
-atmosphere between them (`parallax-2.5d.md`); a heavy dark vignette is not a style.
+negation names), but keep "no text or letters". For a layered film, ask for separated depth planes
+(`parallax-2.5d.md`).
 
-**Do not "fix" the look with a code filter.** A Kuwahara + colour-quantise "painterly" pass read as a cheap
-filter (blocky, speckled, low contrast). Fix the prompt; in the film add only moving grain and the grade.
+Fix the look in the prompt rather than with a code filter: in one test a Kuwahara + colour-quantise "painterly"
+pass read as a cheap filter (blocky, speckled, low contrast).
 
 ## 4. Review like the viewer will see it
 
-- Show **graded** contact sheets (the film's grade + vignette applied), next to an approved frame for tone. Raw
-  sheets looked off-tone and misled the review.
-- Per image: one light that fits the beat, no wet shine, no border, no text, faces ordinary and distinct, props
-  real, the subject reads at phone size.
+- Show contact sheets with the film's grade applied, next to an approved frame for tone; raw sheets can mislead
+  the review.
+- Per image: matches the style reference, no border, no text, faces distinct, props real, the subject reads at
+  phone size.
 - Content filters fail some shots silently (a lodging-house interior failed twice): plan a fallback composition.
 - Never present a generated portrait as a real person's photo; describe it as an illustration.

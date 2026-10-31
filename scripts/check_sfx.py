@@ -15,7 +15,7 @@ Inputs
   lines.json   optional narration lines [[start, end], ...] or [{"start", "end"}, ...]; without it the lines
                are found from the vo stem (speech = 50 ms frames within 20 dB of its peak)
 
-Checks (defaults from five finished 2-3 min narrated shorts; tune per genre)
+Checks (defaults = the optional narrated-reel preset, references/preset-narrated-reel.md; pass your own per style)
   1 ORPHAN   every one-shot has a picture event within 100 ms (or lands inside a move it can carry)
   2 HITS     at most --hit-max big hits, at least --hit-gap s apart
   3 DENSITY  hard effects during narration <= --density per 2 s

@@ -62,17 +62,9 @@ hook (0–2 s: an image or line that creates a question) → tension/problem or
 curiosity → reveal (product/idea) → proof (1–3 concrete beats) → payoff and
 call to action → end card with logo held ≥ 1.5 s.
 Long-form explainer: promise → context → 3–5 steps, each one idea → recap.
-Narrated story (1–3 min short): hook (0–4 s) → title by ~4 s → chapters, each ending on a small question →
-reveal → closing question to the viewer (comments) → end card.
-
-**The hook (first 4 seconds)** — viewers decide before 0:04:
-- Frame 0 is already moving, with sound already playing; no logo, channel name or black fade longer than 0.3 s.
-- The first line starts by 0.2 s: a concrete anomaly or claim in ≤ 12 words, never "today we'll talk about…".
-- **Start from the picture the audience already has, then break it** (a story channel: "the zombies you know
-  bite and infect… the first zombie was a slave" beat a hook about graves and old lore nobody remembers).
-- A reveal or strongest image around 3 s, the title around 4 s. Names and context can come after the hook.
-- Write 6–8 hook options in groups (belief twist, flipped fear / promise, strange fact, direct question, timely
-  angle such as a holiday) and let the user pick; compare two hooks later with the platform's retention graph.
+**The hook.** On social feeds the first seconds decide the view: open on movement and a line that creates a
+question, not a logo or "today we'll talk about…". Offer the user a few hook options and let them choose; their
+channel's own rules win. (A tested 4-second hook recipe for narrated Reels is in `preset-narrated-reel.md`.)
 
 | Genre | Hook pattern |
 |---|---|
@@ -87,9 +79,8 @@ reveal → closing question to the viewer (comments) → end card.
 | # | Dur | Line / beat | Shot size | Camera move | Subject / on-screen event | Light | Text | Sound | Why for this line |
 |---|-----|-------------|-----------|-------------|---------------------------|-------|------|-------|-------------------|
 
-Each shot serves its narration line: choose size, angle, light and the on-screen event *for that line*, and
-avoid stock repeats across neighbours (a lamp in every shot, four "figure walking away", a slow push on
-everything). One shot per 4–8 s for narrated films.
+Each shot serves its line: choose size, angle, light and the on-screen event *for that line*, and avoid stock
+repeats across neighbours (the same light, pose or camera move shot after shot).
 
 - Shot sizes: wide/establishing (where), medium (who/what), close-up
   (emotion/detail), macro/insert (product truth). Vary sizes between
@@ -135,8 +126,8 @@ the user's trust and a round trip.
 
 - **Before the first render**, agree the look, the sound policy (real recordings
   vs generated) and the budget (paid generation per image / voice / music, how
-  many takes). One story channel threw away a whole first version because style,
-  music and sound quality were never in the brief.
+  many takes). A first version made without these in the brief is often thrown
+  away.
 - **For a series**, save the decisions in the project (an `AGENTS.md` / project
   skill: style block + reference frame, voice and settings, mix numbers, hook
   rules, delivery rules, a reference episode to copy). Each finished episode

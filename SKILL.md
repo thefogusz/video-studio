@@ -44,6 +44,7 @@ resizing or subtitling an existing video.
 | Stills / illustrations / generated images that must feel alive (story, history, explainer channels) | 2.5D parallax on HTML+GSAP | `references/parallax-2.5d.md` |
 | Generating the images themselves (cost, consistency, "looks AI") | Image generation | `references/ai-images.md` |
 | Final checks, cover, platform captions/descriptions, clean-up | Delivery | `references/delivery.md` |
+| A ready-made style for narrated story Reels/Shorts (hook, voice, look, sound, copy) — optional, offer it, never impose it | Preset | `references/preset-narrated-reel.md` |
 | Trim, join, resize, re-encode, speed, audio level, 9:16 from 16:9 | ffmpeg | `references/ffmpeg-cutting.md` |
 | Remove silences / dead air automatically | auto-editor (or ffmpeg silencedetect) | `references/ffmpeg-cutting.md` §Silence |
 | Clean up a person talking to camera: fillers, retakes, jump cuts, punch-ins | transcript-driven recut | `references/talking-head.md` |
@@ -139,10 +140,6 @@ and official `hyperframes` / `remotion-*` skills if present.
 - **Safe areas:** for 9:16 social, keep text out of the top ~14% and bottom
   ~35% (TikTok/Reels/Shorts caption, buttons and description cover ~660 px of
   1920) and ~6% from the sides. `scripts/qa_scan.mjs` checks it.
-- **Hook:** the first 4 s decide the view (`direction.md` §Hook): motion and
-  sound from frame 0, first line by 0.2 s, start from what viewers already know.
-- **Every sound has a cause on screen** (or is a deliberate off-screen event);
-  every moving thing that would make noise has one (`sound.md` §3).
 - **Fonts:** Thai text needs a font with Thai glyphs (e.g. Noto Sans Thai,
   Sarabun, Prompt, Kanit, Tahoma). Name it explicitly in every renderer; a
   missing font silently produces boxes.

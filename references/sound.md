@@ -7,8 +7,7 @@ every decision here is derived from the picture code and checked with measuremen
 ## 1. Sources: decide real vs generated with the user first
 
 Ask once: does the brief want **real recorded / professionally produced sound**, or is a designed synthetic
-palette fine? A narrated story channel rejected synths and code-made sound outright ("our stories don't suit
-digital sound"); a tech launch film may want exactly that.
+palette fine? Story and documentary work often wants the first; a tech launch film may want the second.
 
 | Source | Use | Licence |
 |---|---|---|
@@ -41,60 +40,45 @@ Per file: `find` the best trim → `describe` it → `match` z ≥ 3 for what it
 whistle vs kettle) → `realness` on the trim when the brief wants real sound. Failed files: re-source or drop.
 Measured once: hounds were heard as insects, a police whistle as a kettle, a bell matched at z 1.6 and was dropped.
 
-## 3. Spotting: one row per shot, from the picture code
+## 3. Spotting from the picture code
 
-Get the visual events from the page itself (`scripts/extract_events.mjs film.html events.json`), then write the
-spotting table into the mixer (never from memory): shot, in, out, place, what moves, off-screen threat.
+Get the visual events from the page itself (`scripts/extract_events.mjs film.html events.json`: cuts, appear /
+vanish, moves, strokes being drawn), then write a spotting table into the mixer (shot, in, out, place, what
+moves) instead of placing sounds from memory. How dense, how many hits, music over or under the world: those are
+style choices for the brief (one tested set is in `preset-narrated-reel.md`).
 
-1. **Ambience per place.** One bed per location, starting 0.3 s before the cut and ending ~0.1 s after the next,
-   so the sound changes with the picture. Title cards and graphic boards get no ambience (paper / pen only).
-2. **Effects only on visible motion.** Each thing that moves and would make a noise gets one sound whose attack
-   lands on the frame the motion peaks or ends. No sound for things that do not move. Off-screen sounds only as
-   deliberate implied events, quiet, labelled `offscreen:` in the cue id.
-3. **Graphics (kinetic type, stamps, boards):** text that slams in gets a short real whoosh into a real paper /
-   stamp touch at about -31 dB — silence there was heard as "the motion sounds are missing". A pen scratch only
-   where a line is visibly drawn by hand (≥ 0.4 s); highlighter swipes and things that just appear get none. Choose
-   by what the viewer *sees*, not by the element type in the code. One sound per group appearing together.
-4. **Hit budget.** 2–3 big hits per 2–3 min, ≥ 40 s apart, each after a 0.7–1.5 s lull (music -16 dB, ambience
-   -12 dB). Smaller accents ≤ 1 per 10–15 s. Put hits in the **gaps between words** (word times from the
-   timeline): a hit on a key word buries it.
-5. **One recurring motif** (heartbeat, drip, clock, a musical figure) that returns 2–3 times and grows.
-6. **Music under the world:** in every picture shot the ambience is within 3 dB of the music or above it; music is
-   present from frame 0 and follows the story's energy with a gain curve (calm, build, lull, swell, question).
-7. **At most voice + music + 1–3 effects at once.**
-8. **Trim every one-shot.** A 120 s ambience file placed as a "stutter" event ran under the whole film and the
-   owner heard it as a music bug. `x[:int(sec*SR)]` + fade, always.
-9. **Cue times are event times:** whooshes align on their peak, risers on their end, impacts on their attack
-   (measured, not the file start). Write that time into `cues.json` with `align` (`onset` / `peak` / `end` / `bed`),
-   or every checker reports false misses.
+Technical rules that hold for any style:
+- **Trim every one-shot.** A 120 s ambience file placed as a short event ran under a whole film and was heard as
+  a music bug. `x[:int(sec*SR)]` + fade, always.
+- **Cue times are event times:** whooshes align on their peak, risers on their end, impacts on their attack
+  (measured, not the file start). Write that time into `cues.json` with `align` (`onset` / `peak` / `end` /
+  `bed`), or every checker reports false misses.
+- Ambience beds that change with a cut usually start 0.2–0.5 s before it (sound leads picture).
+- A hit on a key word buries the word: use word times from the timeline to place hits in gaps.
 
-## 4. Mix numbers (narrated shorts; starting points)
+## 4. Mix and master
 
-| Element | Level |
-|---|---|
-| Voice | each line toward -19 dB RMS (±4) |
-| Music | ~-25 dB RMS, ducked -12 dB under the voice (envelope follower) |
-| Ambience | -28 to -33 dB RMS, ducked -7 under the voice |
-| Effects | duck -5 under the voice; drop 3–6 dB when landing on a word |
-| Hits | keep their first 0.25 s through the duck; tail fade 0.6–1.6 s so they never ring under the next line |
-| Ending | not more than ~10 LU below the body; no 5 s fade into silence (end on a sting / logo hit) |
-| Master | two-pass loudnorm to -14 LUFS, TP -2.0 in the WAV (≤ -1.0 on the AAC); a late sting is lowered alone, never the whole master |
-
-A deterministic numpy mixer (place clips by time, duck with an envelope follower, write stems + `cues.json`) is
-reproducible and cheap to re-run; vectorise the envelope (a per-sample Python loop took 50 s for 2.5 min).
+- Voice always wins: duck music 12–18 dB under speech with an envelope follower (or `sidechaincompress`).
+- A deterministic numpy mixer (place clips by time, duck, write stems + `cues.json`) is reproducible and cheap
+  to re-run; vectorise the envelope (a per-sample Python loop took 50 s for 2.5 min).
+- Master: two-pass loudnorm to -14 LUFS for social, TP -2.0 in the WAV so the AAC upload stays ≤ -1.0 dBTP;
+  check the encoded MP4, not only the WAV. A late addition (a sting) is lowered on its own, never the whole master.
+- earshot's critique flags an ending far quieter than the body (a 5 s fade into silence scored "major"); end on a
+  sound if the brief allows.
 
 ## 5. Check before anyone listens
 
 ```bash
 node <skill-dir>/scripts/extract_events.mjs film.html events.json
-python <skill-dir>/scripts/check_sfx.py --cues mix/cues.json --events events.json --stems mix/stems
+python <skill-dir>/scripts/check_sfx.py --cues mix/cues.json --events events.json --stems mix/stems [thresholds]
 earshot timeline out/film.mp4 --cues mix/cues.json      # every cue OK or "near" (≤ 100 ms); fix NO HIT / CHECK
 earshot critique mix/master.wav                          # scorecard; run it BEFORE the full picture render
 ```
-- `check_sfx.py` must print PASS (orphans, hit budget, density, voice clarity, world vs music).
-- Sync: sound onset within -20 / +40 ms of the event frame; fail beyond -40 / +60 ms (EBU R37). Big hits 0 to +1 frame.
-- Run the critique before the full render: a quiet ending found after the render started cost a full re-render.
-- Then the human question: "does every sound belong to something on screen?"
+- `check_sfx.py` measures orphans (effects with no picture event), hit count and spacing, density during
+  narration, voice clarity per line and ambience vs music. Its default thresholds are the narrated-reel preset;
+  pass your own for other styles.
+- Sync: sound onset within -20 / +40 ms of the event frame; fail beyond -40 / +60 ms (EBU R37). Hits 0 to +1 frame.
+- Run the critique before the full render: a problem found after a long render started costs the whole render.
 
 Without earshot, check sync from waveforms around each cut:
 ```bash
